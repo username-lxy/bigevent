@@ -38,16 +38,16 @@ $(function() {
     // 监听登陆事件
     $('.login-form').on('submit', function(e) {
         e.preventDefault();
-        const data = {
-            username: $('.login-form [name=username]').val(),
-            password: $('.login-form [name=password]').val(),
-        }
-        $.post('http://ajax.frontend.itheima.net/api/login', data,
+        // const data = {
+        //     username: $('.login-form [name=username]').val(),
+        //     password: $('.login-form [name=password]').val(),
+        // }
+        $.post('/api/login', $(this).serialize(),
             function(res) {
                 if (res.status != 0) return layer.msg(res.message);
                 layer.msg('登陆成功！');
                 // console.log(res.token);
-                localStorage.setItem('Authorization', res.token);
+                localStorage.setItem('token', res.token);
                 location.href = '/index.html';
             })
     });
@@ -59,7 +59,7 @@ $(function() {
             username: $('.reg-form .ipt-user').val(),
             password: $('.reg-form [name=password]').val()
         }
-        $.post("http://ajax.frontend.itheima.net/api/reguser", data,
+        $.post("/api/reguser", data,
             function(res) {
                 // 判断是否注册成功
                 if (res.status != 0) return layer.msg(res.message);
