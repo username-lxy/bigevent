@@ -11,23 +11,16 @@ $.ajaxPrefilter(function(option) {
         }
     }
 
+
+    // 为统一的ajax请求，挂载一个complete回调函数
     option.complete = function(res) {
         // console.log(res);
         // 判断当信息获取失败时，将json格式的对象，转换为正常对象
-        var responseText = JSON.parse(res.responseText);
-        if (responseText.status === 1 && responseText.message === '身份认证失败！') {
+        if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
             // 1、强制跳转到登陆页面
             location.href = '/login.html';
             // 2、清空localStorage中的token
-            localStorage.removeItem('token');
+            window.parent.localStorage.removeItem('token');
         }
-        // console.log(res.responseText.status);  // 为什么取不到数据
-        // if (res.responseText.status === 1 && res.responseText.message === '身份认证失败！') {
-        //     // 1、强制跳转到登陆页面
-        //     location.href = '/login.html';
-        //     // 2、清空localStorage中的token
-        //     localStorage.removeItem('token');
-        // }
     }
-
 })

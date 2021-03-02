@@ -1,7 +1,20 @@
 $(function() {
+    // 用来设置进入之网页之后实现自动刷新功能
+    (function() {
+        // console.log(window.localStorage);
+        // alert(window.localStorage);
+        if (window.localStorage) {
+            // console.log(1);
+            if (!localStorage.getItem('firstLoad')) {
+                // alert(1)
+                localStorage['firstLoad'] = true;
+                window.location.reload();
+            } else
+                localStorage.removeItem('firstLoad');
+        }
+    })();
     // 设置用户信息功能
     getUserInfo();
-
     // 实现退出功能
     $('.logout').on('click', function() {
         // 弹出提示框
@@ -16,15 +29,17 @@ $(function() {
     })
 });
 
+
 // 获取用户信息
 function getUserInfo() {
+    // console.log(window);
     $.ajax({
         type: "GET",
         url: "/my/userinfo",
         success: function(res) {
             console.log(res);
             if (res.status != 0) return layui.layer.msg('获取用户信息失败！');
-            // 更改用户头像
+            // 调用更改用户头像函数
             user(res.data);
         }
     });
@@ -32,18 +47,21 @@ function getUserInfo() {
 
 // 更改用户头像
 function user(user) {
+    // console.log('调用了更新函数');
+    // console.log(user);
     var name = user.nickname || user.username;
     // 修改欢迎的名字
-    $('.welcome').html('欢迎 ' + name);
+    $('.welcome').html('欢迎&nbsp;&nbsp;' + name);
     // 当昵称部位空时，显示真实头像
-    if (user.user_pic != null) {
+    if (user.user_pic !== null) {
+        // console.log('11111');
         $('.text-avatar').hide();
-        $('.layui-nav-img').prop('src', user.user_pic);
+        $('.layui-nav-img').attr('src', user.user_pic).show();
     } else {
         // 当昵称为空时，显示用户名的第一个字的大写
-        var username = user.username.substr(0, 1).toUpperCase();
+        var username = name.substr(0, 1).toUpperCase();
         $('.layui-nav-img').hide();
-        console.log(username);
+        // console.log(username);
         $('.text-avatar').html(username).show();
     }
 }

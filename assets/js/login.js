@@ -38,10 +38,6 @@ $(function() {
     // 监听登陆事件
     $('.login-form').on('submit', function(e) {
         e.preventDefault();
-        // const data = {
-        //     username: $('.login-form [name=username]').val(),
-        //     password: $('.login-form [name=password]').val(),
-        // }
         $.post('/api/login', $(this).serialize(),
             function(res) {
                 if (res.status != 0) return layer.msg(res.message);
