@@ -33,8 +33,8 @@ $(function() {
                 layui.layer.msg('恭喜您，修改信息成功！');
                 // 2、左侧导航栏中对应的头新，昵称也要做响应的改变
                 // 调用父页面的中方法
-                console.log(window);
-                console.log(window.parent);
+                // console.log(window);
+                // console.log(window.parent);
                 window.parent.getUserInfo();
             }
         })
@@ -55,7 +55,7 @@ function getInitUserInfo() {
         type: "GET",
         url: "/my/userinfo",
         success: function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status != 0) return layui.layer.msg(res.message);
             // 将用户信息渲染到页面中
             userInfo(res.data);

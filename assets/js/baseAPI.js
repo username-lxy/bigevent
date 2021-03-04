@@ -2,6 +2,7 @@ $.ajaxPrefilter(function(option) {
     // console.log(option);
     // 将根路径与url进行拼接
     option.url = 'http://ajax.frontend.itheima.net' + option.url;
+    // option.url = 'http://api-breakingnews-web.itheima.net' + option.url;
     // 统一定义headers
     // 判断是否需要有headers,可以直接判断请求的url中是否含有my,
     // indexOf()方法可以直接判断，当不存在时会返回-1，当存在的时候会返回第一个索引

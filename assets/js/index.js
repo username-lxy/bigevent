@@ -37,7 +37,7 @@ function getUserInfo() {
         type: "GET",
         url: "/my/userinfo",
         success: function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status != 0) return layui.layer.msg('获取用户信息失败！');
             // 调用更改用户头像函数
             user(res.data);
@@ -64,4 +64,9 @@ function user(user) {
         // console.log(username);
         $('.text-avatar').html(username).show();
     }
+}
+
+//实现跳转
+function father() {
+    $('.a').addClass('layui-this').siblings().removeClass('layui-this');
 }

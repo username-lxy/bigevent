@@ -76,7 +76,7 @@ function getimg() {
         type: 'GET',
         url: '/my/userinfo',
         success: function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status !== 0) return layui.layer.msg('用户信息获取失败')
                 // 如果用户有头像，就用用户当前的头像
             if (res.data.user_pic !== null) {
